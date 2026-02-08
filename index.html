@@ -201,6 +201,48 @@
     </style>
 </head>
 <body>
+    <style>
+/* Noto Nastaliq Urdu فونٹ کا لنک (گوگل فونٹس سے) */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500&display=swap');
+
+/* Marquee bar ki styling */
+#top-notification-bar {
+    /* Position: fixed isse top par fiks rakhega */
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* Barik/Patla look dene ke liye padding kam rakhi gayi hai */
+    padding: 3px 0; 
+    
+    /* Font aur color setting */
+    background-color: #E0F7FA; /* Bahut halka neela background */
+    color: #1976D2; /* Standard, gehra neela text color */
+    font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', Arial, sans-serif; 
+    font-size: 14px; /* Bareek/Chota font size */
+    font-weight: 500; /* Thora sa halka weight */
+    
+    z-index: 9999; /* Isse doosre elements ke upar rakhega */
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap; /* Marquee ke liye zaroori */
+}
+
+/* Marquee tag ki styling (optional) */
+#top-notification-bar marquee {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+</style>
+
+<!-- Top Bar ka HTML Marquee Code -->
+<div id="top-notification-bar">
+    <!-- scrollamount speed control karta hai. Isko 3 rakha gaya hai taake bareek lage -->
+    <marquee direction="left" scrollamount="3">
+        آپ کے 3010 لائکس باقی رہ گئے ہیں
+    </marquee>
+</div>
 
     <div class="container">
         
