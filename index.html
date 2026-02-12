@@ -3,431 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Romi | Professional SMM Solutions</title>
-    
-    <!-- Bootstrap 5 -->
+    <title>Roomi Services | Professional TikTok Growth</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts (Professional Look) -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- Firebase SDK (Compat Version) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
     <style>
-        :root {
-            --primary-color: #2563eb; /* Professional Blue */
-            --secondary-color: #64748b; /* Slate Grey */
-            --bg-light: #f8fafc;
-            --card-white: #ffffff;
-            --text-main: #1e293b;
-            --accent: #3b82f6;
-        }
-
-        body {
-            background-color: var(--bg-light);
-            color: var(--text-main);
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding-top: 20px;
-        }
-
-        /* --- Header Section --- */
-        .hero-section {
-            padding: 60px 0 40px;
-            text-align: center;
-        }
-
-        .hero-title {
-            font-weight: 700;
-            font-size: 2.5rem;
-            color: var(--text-main);
-            margin-bottom: 10px;
-        }
-
-        .hero-title span {
-            color: var(--primary-color);
-        }
-
-        .hero-subtitle {
-            color: var(--secondary-color);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto 40px;
-        }
-
-        /* --- Service Cards --- */
-        .service-card {
-            background: var(--card-white);
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 30px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            height: 100%;
-            text-align: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        }
-
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            border-color: var(--primary-color);
-        }
-
-        .icon-box {
-            width: 70px;
-            height: 70px;
-            background: #eff6ff;
-            color: var(--primary-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 1.8rem;
-            transition: 0.3s;
-        }
-
-        .service-card:hover .icon-box {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .service-card h4 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        /* --- Order Form --- */
-        .order-container {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            max-width: 550px;
-            margin: 40px auto;
-            display: none;
-            border: 1px solid #e2e8f0;
-        }
-
-        .form-label {
-            font-weight: 500;
-            color: var(--text-main);
-            margin-bottom: 8px;
-        }
-
-        .form-control {
-            border: 2px solid #f1f5f9;
-            padding: 12px 15px;
-            border-radius: 10px;
-            transition: 0.3s;
-        }
-
-        .form-control:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
-        }
-
-        .btn-submit {
-            background: var(--primary-color);
-            color: white;
-            font-weight: 600;
-            padding: 12px;
-            border-radius: 10px;
-            border: none;
-            width: 100%;
-            margin-top: 10px;
-            transition: 0.3s;
-        }
-
-        .btn-submit:hover {
-            background: #1d4ed8;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-        }
-
-        /* --- Tracking Table --- */
-        .tracking-card {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            margin-top: 60px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-        }
-
-        .table thead th {
-            background: #f8fafc;
-            color: var(--secondary-color);
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.05em;
-            padding: 15px;
-            border: none;
-        }
-
-        .table tbody td {
-            padding: 15px;
-            vertical-align: middle;
-            border-bottom: 1px solid #f1f5f9;
-        }
-
-        .status-badge {
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .status-pending { background: #fef9c3; color: #854d0e; }
-        .status-processing { background: #dbeafe; color: #1e40af; }
-        .status-completed { background: #dcfce7; color: #166534; }
-        .status-canceled { background: #fee2e2; color: #991b1b; }
-
-        .refresh-icon {
-            cursor: pointer;
-            color: var(--primary-color);
-            transition: transform 0.5s ease;
-        }
-
-        footer {
-            padding: 40px 0;
-            text-align: center;
-            color: var(--secondary-color);
-            font-size: 0.9rem;
-        }
+        :root { --primary: #2563eb; --bg: #f8fafc; }
+        body { background: var(--bg); font-family: 'Poppins', sans-serif; padding-top: 60px; }
+        #top-bar { position: fixed; top: 0; left: 0; width: 100%; background: #E0F7FA; color: #1976D2; padding: 10px 0; z-index: 1000; font-weight: bold; border-bottom: 1px solid #B2EBF2; }
+        .service-card { background: white; border-radius: 15px; padding: 30px; border: 1px solid #e2e8f0; cursor: pointer; transition: 0.3s; text-align: center; }
+        .service-card:hover { border-color: var(--primary); transform: translateY(-5px); }
+        .order-box { background: white; border-radius: 20px; padding: 30px; max-width: 500px; margin: 30px auto; box-shadow: 0 10px 25px rgba(0,0,0,0.05); display: none; }
     </style>
 </head>
 <body>
-    <style>
-/* Noto Nastaliq Urdu فونٹ کا لنک (گوگل فونٹس سے) */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500&display=swap');
 
-/* Marquee bar ki styling */
-#top-notification-bar {
-    /* Position: fixed isse top par fiks rakhega */
-    position: fixed; 
-    top: 2;
-    left: 0;
-    width: 100%;
-    /* Barik/Patla look dene ke liye padding kam rakhi gayi hai */
-    padding: 6px 0; 
-    
-    /* Font aur color setting */
-    background-color: #E0F7FA; /* Bahut halka neela background */
-    color: #1976D2; /* Standard, gehra neela text color */
-    font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', Arial, sans-serif; 
-    font-size: 14px; /* Bareek/Chota font size */
-    font-weight: 500; /* Thora sa halka weight */
-    
-    z-index: 9999; /* Isse doosre elements ke upar rakhega */
-    text-align: center;
-    overflow: hidden;
-    white-space: nowrap; /* Marquee ke liye zaroori */
-}
-
-/* Marquee tag ki styling (optional) */
-#top-notification-bar marquee {
-    display: inline-block;
-    padding: 0;
-    margin: 0;
-}
-</style>
-
-<!-- Top Bar ka HTML Marquee Code -->
-<div id="top-notification-bar">
-    <!-- scrollamount speed control karta hai. Isko 3 rakha gaya hai taake bareek lage -->
-    <marquee direction="left" scrollamount="3">
-        آپ کے 1510 لائکس باقی رہ گئے ہیں
-    </marquee>
+<div id="top-bar">
+    <marquee id="live-limit" direction="left" scrollamount="4">لوڈنگ ہو رہی ہے...</marquee>
 </div>
 
-    <div class="container">
-        
-        <!-- Header -->
-        <header class="hero-section">
-            <h1 class="hero-title">Roomi <span>Services</span></h1>
-            <p class="hero-subtitle">Premium social media growth solutions for businesses and influencers. Fast, reliable, and secure.</p>
-        </header>
-
-        <!-- Services Grid -->
-        <div class="row g-4" id="servicesGrid">
-            <!-- Services injected via JS -->
-        </div>
-
-        <!-- Order Form -->
-        <div id="orderSection" class="order-container">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h3 id="selectedServiceTitle" class="m-0" style="font-weight: 600;">Place Order</h3>
-                <button type="button" class="btn-close" onclick="hideForm()"></button>
-            </div>
-            
-            <form id="orderForm">
-                <input type="hidden" id="serviceId">
-                <input type="hidden" id="serviceName">
-                
-                <div class="mb-3">
-                    <label class="form-label">Target Link</label>
-                    <input type="url" class="form-control" id="linkInput" placeholder="https://facebook.com/your-profile" required>
-                </div>
-
-                <div class="mb-4">
-                    <label class="form-label d-flex justify-content-between">
-                        Quantity <span id="limitDisplay" class="text-primary"></span>
-                    </label>
-                    <input type="number" class="form-control" id="quantityInput" placeholder="Minimum 100" required>
-                </div>
-
-                <div class="d-flex gap-2">
-                    <button type="submit" class="btn-submit">Confirm Order</button>
-                </div>
-            </form>
-        </div>
-
-        <!-- Tracking Section -->
-        <div class="tracking-card">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h4 class="m-0" style="font-weight: 600;"><i class="fas fa-list-ul me-2 text-primary"></i>Recent Orders</h4>
-                <div class="d-flex align-items-center gap-3">
-                    <i class="fas fa-sync-alt refresh-icon" onclick="refreshHistory()" title="Refresh Status"></i>
-                </div>
-            </div>
-
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Service Details</th>
-                            <th>Status</th>
-                            <th>Remains</th>
-                        </tr>
-                    </thead>
-                    <tbody id="historyBody">
-                        <tr><td colspan="4" class="text-center text-muted">No orders found on this device.</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Footer -->
-        <footer>
-            <p>&copy; 2024 Mahar SMM Solutions. Built for Professionals.</p>
-        </footer>
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="fw-bold">Roomi <span class="text-primary">Services</span></h1>
+        <p class="text-muted">Safe & Instant Social Media Solutions</p>
     </div>
 
-    <script>
-        const services = [
-            { name: "Tiktok Likes", id 4910: , icon: "fa-heart", limit: 10000, desc: "High Quality Profile Followers" },
-        ];
+    <div class="row">
+        <div class="col-md-5 mx-auto">
+            <!-- TikTok Service Card -->
+            <div class="service-card" onclick="document.getElementById('order-section').style.display='block'">
+                <div class="mb-3"><i class="fas fa-heart fa-3x text-primary"></i></div>
+                <h4>TikTok Likes</h4>
+                <p class="small text-muted">High Retention • 10K Global Limit</p>
+                <span id="badge-limit" class="badge bg-primary rounded-pill">Checking Stock...</span>
+            </div>
 
-        // Render Services
-        const grid = document.getElementById('servicesGrid');
-        services.forEach(service => {
-            const col = document.createElement('div');
-            col.className = 'col-lg-3 col-md-6';
-            col.innerHTML = `
-                <div class="service-card" onclick="openForm(${service.id})">
-                    <div class="icon-box">
-                        <i class="fas ${service.icon}"></i>
+            <!-- Form -->
+            <div id="order-section" class="order-box">
+                <form id="orderForm">
+                    <div class="mb-3">
+                        <label class="form-label">TikTok Video Link</label>
+                        <input type="url" id="targetLink" class="form-control" placeholder="https://www.tiktok.com/@user/video/..." required>
                     </div>
-                    <h4>${service.name}</h4>
-                    <p class="text-muted small">${service.desc}</p>
-                    <span class="badge bg-light text-dark border">Max: ${service.limit.toLocaleString()}</span>
-                </div>
-            `;
-            grid.appendChild(col);
-        });
+                    <div class="mb-4">
+                        <label class="form-label">Quantity</label>
+                        <input type="number" id="targetQty" class="form-control" placeholder="Min 100" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">Place Order</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
-        function openForm(id) {
-            const service = services.find(s => s.id === id);
-            document.getElementById('serviceId').value = service.id;
-            document.getElementById('serviceName').value = service.name;
-            document.getElementById('selectedServiceTitle').innerText = service.name;
-            document.getElementById('limitDisplay').innerText = `Limit: ${service.limit}`;
-            
-            const formDiv = document.getElementById('orderSection');
-            formDiv.style.display = 'block';
-            formDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    <!-- History -->
+    <div class="mt-5">
+        <h5 class="mb-3 text-center"><i class="fas fa-sync fa-spin me-2 text-primary"></i>Live Orders Activity</h5>
+        <div class="table-responsive bg-white rounded-3 shadow-sm p-3">
+            <table class="table align-middle">
+                <thead><tr><th>Order ID</th><th>Quantity</th><th>Status</th></tr></thead>
+                <tbody id="orderHistory"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- YOUR FIREBASE CONFIG ---
+    const firebaseConfig = {
+      apiKey: "AIzaSyDASz6i9dwy_LKDsuHbyAvSNjdwtRuaPm4",
+      authDomain: "roomiliks.firebaseapp.com",
+      databaseURL: "https://roomiliks-default-rtdb.firebaseio.com",
+      projectId: "roomiliks",
+      storageBucket: "roomiliks.firebasestorage.app",
+      messagingSenderId: "1062299998503",
+      appId: "1:1062299998503:web:f0e0488eeab60724f0f102"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // 1. Live Limit Listener
+    db.ref('likes_limit').on('value', (snap) => {
+        const val = snap.val() || 0;
+        document.getElementById('live-limit').innerText = `آپ کے ${val.toLocaleString()} لائکس باقی رہ گئے ہیں`;
+        document.getElementById('badge-limit').innerText = `Stock: ${val.toLocaleString()}`;
+    });
+
+    // 2. Order Submission
+    document.getElementById('orderForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const link = document.getElementById('targetLink').value;
+        const qty = parseInt(document.getElementById('targetQty').value);
+
+        const snap = await db.ref('likes_limit').once('value');
+        const currentLimit = snap.val();
+
+        if (qty > currentLimit) {
+            return Swal.fire('Out of Stock', `Hamare paas sirf ${currentLimit} likes bache hain.`, 'warning');
         }
 
-        function hideForm() {
-            document.getElementById('orderSection').style.display = 'none';
-        }
+        Swal.fire({ title: 'Connecting to Server...', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
 
-        // Logic (Order Submit & Tracking)
-        document.getElementById('orderForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const serviceId = document.getElementById('serviceId').value;
-            const serviceName = document.getElementById('serviceName').value;
-            const qty = document.getElementById('quantityInput').value;
-            const link = document.getElementById('linkInput').value;
-
-            Swal.fire({
-                title: 'Processing...',
-                text: 'Please wait while we place your order',
-                allowOutsideClick: false,
-                didOpen: () => { Swal.showLoading() }
+        try {
+            // BACKEND CALL (/api/order.js)
+            const response = await fetch('/api/order', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    service: '4910', // Aapka TikTok service ID
+                    link: link,
+                    quantity: qty
+                })
             });
 
-            try {
-                const response = await fetch('/api/order', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ service: serviceId, link: link, quantity: qty })
+            const result = await response.json();
+
+            if (result.order) {
+                // Subtract from Firebase
+                await db.ref('likes_limit').set(currentLimit - qty);
+
+                // Save Order Record
+                await db.ref('orders/' + result.order).set({
+                    link: link, qty: qty, time: Date.now()
                 });
 
-                const result = await response.json();
-
-                if (result.order) {
-                    saveOrderLocally(result.order, serviceName);
-                    Swal.fire({ icon: 'success', title: 'Order Placed!', text: 'ID: ' + result.order });
-                    hideForm();
-                    document.getElementById('orderForm').reset();
-                } else {
-                    throw new Error(result.error || 'Failed to place order');
-                }
-            } catch (error) {
-                Swal.fire({ icon: 'error', title: 'Error', text: error.message });
+                Swal.fire('Order Success!', `Order ID: #${result.order}`, 'success');
+                document.getElementById('orderForm').reset();
+            } else {
+                Swal.fire('API Error', result.error || 'Failed to place order', 'error');
             }
+        } catch (err) {
+            Swal.fire('Error', 'Server connection failed!', 'error');
+        }
+    });
+
+    // 3. Activity Feed
+    db.ref('orders').limitToLast(8).on('value', snap => {
+        const list = document.getElementById('orderHistory');
+        list.innerHTML = '';
+        snap.forEach(child => {
+            const o = child.val();
+            list.innerHTML = `<tr>
+                <td>#${child.key}</td>
+                <td>${o.qty}</td>
+                <td><span class="badge bg-success">Processing</span></td>
+            </tr>` + list.innerHTML;
         });
-
-        function saveOrderLocally(id, name) {
-            let orders = JSON.parse(localStorage.getItem('mahar_orders') || '[]');
-            orders.unshift({ id, service: name, status: 'Pending', remains: '0' });
-            localStorage.setItem('mahar_orders', JSON.stringify(orders.slice(0, 10)));
-            loadHistory();
-        }
-
-        function loadHistory() {
-            const orders = JSON.parse(localStorage.getItem('mahar_orders') || '[]');
-            const tbody = document.getElementById('historyBody');
-            if(orders.length === 0) return;
-
-            tbody.innerHTML = orders.map(o => `
-                <tr>
-                    <td><b>#${o.id}</b></td>
-                    <td>${o.service}</td>
-                    <td><span class="status-badge status-${o.status.toLowerCase()}">${o.status}</span></td>
-                    <td>${o.remains}</td>
-                </tr>
-            `).join('');
-        }
-
-        async function refreshHistory() {
-            const btn = document.querySelector('.refresh-icon');
-            btn.style.transform = 'rotate(360deg)';
-            // Here you would normally loop through orders and fetch status from API
-            setTimeout(() => { 
-                btn.style.transform = 'rotate(0deg)';
-                loadHistory(); 
-            }, 1000);
-        }
-
-        // Initial Load
-        loadHistory();
-    </script>
+    });
+</script>
 </body>
 </html>
